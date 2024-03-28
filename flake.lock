@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1695644571,
-        "narHash": "sha256-asS9dCCdlt1lPq0DLwkVBbVoEKuEuz+Zi3DG7pR/RxA=",
+        "lastModified": 1711333969,
+        "narHash": "sha256-5PiWGn10DQjMZee5NXzeA6ccsv60iLu+Xtw+mfvkUAs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6500b4580c2a1f3d0f980d32d285739d8e156d92",
+        "rev": "57e6b3a9e4ebec5aa121188301f04a6b8c354c9b",
         "type": "github"
       },
       "original": {
@@ -25,11 +25,11 @@
     "stork": {
       "flake": false,
       "locked": {
-        "lastModified": 1695912173,
-        "narHash": "sha256-aHfUiWTDkBLTNbBFcA2WFd+omh56xxD2Df62mDBP1t4=",
+        "lastModified": 1709727739,
+        "narHash": "sha256-lZU+3BnAzjOniswzoSXw3P15VAqHZQjlrnLoFuBFF3Q=",
         "owner": "isc-projects",
         "repo": "stork",
-        "rev": "c3769bb2be6d050992e02adff9c3949e9972d59e",
+        "rev": "7b8b2b606cd38d51a1c0559222604095efffaffb",
         "type": "github"
       },
       "original": {

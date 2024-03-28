@@ -119,7 +119,7 @@
                 environment = {
                   STORK_REST_STATIC_FILES_DIR = "${self.packages.${pkgs.system}.isc-stork-ui}/stork";
                   STORK_DATABASE_NAME = "stork";
-                  STORK_DATABASE_USER_NAME = "stork-server";
+                  STORK_DATABASE_USER_NAME = "stork";
                   STORK_DATABASE_HOST = "/run/postgresql";
                 };
                 serviceConfig = {
@@ -130,7 +130,7 @@
                 };
 
                 preStart = ''
-                  ${config.services.postgresql.package}/bin/psql -d stork -U stork-server -c "SELECT 1 from pg_extension WHERE extname='pgcrypto';" | grep -q 1 || ${config.services.postgresql.package}/bin/psql -d stork -U stork-server -c "CREATE EXTENSION pgcrypto;"
+                  ${config.services.postgresql.package}/bin/psql -d stork -U stork -c "SELECT 1 from pg_extension WHERE extname='pgcrypto';" | grep -q 1 || ${config.services.postgresql.package}/bin/psql -d stork -U stork -c "CREATE EXTENSION pgcrypto;"
                 '';
                 #  ${self.packages.${pkgs.system}.isc-stork}/bin/stork-tool db-create --db-name stork --db-user stork-server --db-password $(cat ${cfg.server.passwordFile})
 
@@ -139,10 +139,8 @@
               services.postgresql = mkIf cfg.server.createLocalDB {
                 enable = true;
                 ensureUsers = [{
-                  name = "stork-server";
-                  ensurePermissions = {
-                    "DATABASE stork" = "ALL PRIVILEGES";
-                  };
+                  name = "stork";
+                  ensureDBOwnership = true;
                 }];
                 ensureDatabases = [ "stork" ];
               };
@@ -190,7 +188,7 @@
                   yamlinc
                 ];
 
-                vendorHash = "sha256-UbROFLXB2/xUW1WXnhgYta6TI5pwXOr8za1suqEX3SE=";
+                vendorHash = "sha256-gWg8cDYUCEvh/+gnJ8glcXqyuvQVrAOIwZOtc8zI724=";
 
                 subPackages = [
                   "cmd/stork-code-gen"
@@ -214,7 +212,7 @@
               {
                 name = "isc-stork-ui";
                 src = stork + /webui;
-                npmDepsHash = "sha256-TApBWDhbSxDLWaYUUAo0j7aLYVrwTR7cdU94AKmobv4=";
+                npmDepsHash = "sha256-gh3ciSooo4MkE+qpBSHUKfiVGJGxMFBOvZQktYeMc10=";
                 nativeBuildInputs = with pkgs; [
                   yamlinc
                   openapi-generator-cli
@@ -250,7 +248,7 @@
                 yamlinc
               ];
 
-              vendorHash = "sha256-UbROFLXB2/xUW1WXnhgYta6TI5pwXOr8za1suqEX3SE=";
+              vendorHash = "sha256-gWg8cDYUCEvh/+gnJ8glcXqyuvQVrAOIwZOtc8zI724=";
 
               subPackages = [
                 "cmd/stork-agent"
